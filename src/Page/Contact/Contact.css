@@ -1,0 +1,12 @@
+.contact{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.colored{
+    background: linear-gradient(90deg, transparent 25%, lightseagreen 25%, lightseagreen 75%, transparent 75%), linear-gradient(90deg, transparent 0%, aliceblue 0%);
+    background-size: 100% 5px, 100% 100%;
+    background-position: 0% 100%, 0% -5px;
+    background-repeat: no-repeat;  
+    font-family: "poppins";
+    margin-bottom: 20px;
+  }

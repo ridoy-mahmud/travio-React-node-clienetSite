@@ -1,0 +1,109 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color:#777;
+}
+.header{
+    height:95vh;
+    background-image: linear-gradient(to right bottom,rgba(126, 213, 111, 0.726),rgba(40, 180, 131, 0.747)), url("https://i.ibb.co/NFtj1MD/hiker-918473.jpg");
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+
+    clip-path: polygon(0 0,100% 0,100% 75vh,0 100%);
+}
+.text-box{
+    position:absolute;
+    top: 40%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    text-align: center;
+}
+
+.heading-primay{
+    color: white;
+    transform:uppercase;
+}
+.heading-primay-main{
+   display: block;
+   text-align: center;
+   font-size: 60px;
+   font-weight: 400;
+   letter-spacing: 35px;
+   animation-name: moveInLeft;
+   animation-duration: 3s;
+   animation-delay: 0.6s;
+   animation-iteration-count: 1;
+   animation-timing-function: ease-out;
+}
+.heading-primay-sub{
+   display: block;
+   font-size: 25px;
+   font-weight: 700;
+   letter-spacing: 13px;
+   margin-top: 10px;
+   animation: moveInRight 1s ;
+   animation-duration: 3s;
+   animation-delay: 0.6s;
+   animation-iteration-count: 1;
+   animation-timing-function: ease-out;
+
+}
+@keyframes moveInLeft {
+    0%{
+        opacity: 0;
+        transform:translateX(-100px);
+    
+    }
+    80%{
+transform:translateX(20px);
+    }
+    100%{
+        opacity: 1;
+        transform:translate(0);
+    }
+}
+@keyframes moveInRight {
+    0%{
+        opacity: 0;
+        transform:translateX(100px);
+    
+    }
+    80%{
+transform:translateX(-20px);
+    }
+    100%{
+        opacity: 1;
+        transform:translate(0);
+    }
+}
+
+.button:link,
+.button:visited{
+    text-decoration: none;
+    text-transform: uppercase;
+    padding:15px 40px;
+    display:inline-block;
+    border-radius: 100px;
+    transition: all 0.2s;
+}
+.button:hover{
+    transform:translate(-3px);
+    color:rgba(38, 160, 74, 0.808);
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+.button:active{
+    transform:translate(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+.button-c{
+    background-color: white;
+    color:black;
+}
