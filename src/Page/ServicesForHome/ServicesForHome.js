@@ -7,7 +7,7 @@ const ServicesForHome = () => {
     const serviceSlice = services.slice(0, 6)
 
     useEffect(() =>
-        fetch('http://localhost:5000/services')
+        fetch('https://warm-mountain-57493.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setServices(data))
         , [])
