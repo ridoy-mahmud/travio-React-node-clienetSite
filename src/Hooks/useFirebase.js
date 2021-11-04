@@ -1,89 +1,53 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { useEffect, useState } from "react";
-import initializeAuthentication from '../Login/Firebase/firebase.init';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from 'react';
+import initializeAuthentication from "../Login/Firebase/firebase.init"
 
 initializeAuthentication();
 
 const useFirebase = () => {
+    const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
-  const [user, setUser] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
-  const auth = getAuth()
-  const googleProvider = new GoogleAuthProvider()
+    const auth = getAuth();
 
+    const signInUsingGoogle = () => {
+        setIsLoading(true);
+        const googleProvider = new GoogleAuthProvider();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
-      if (user) {
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                setUser(result.user);
+            })
+            .finally(() => setIsLoading(false));
+    }
 
-        setUser(user)
-      } else {
-        setUser({})
-      }
-      setIsLoading(false)
-    })
-    return () => unsubscribe()
-  }, [])
+    // observe user state change
+    useEffect(() => {
+        const unsubscribed = onAuthStateChanged(auth, user => {
+            if (user) {
+                setUser(user);
+            }
+            else {
+                setUser({})
+            }
+            setIsLoading(false);
+        });
+        return () => unsubscribed;
+    }, [])
 
+    const logOut = () => {
+        setIsLoading(true);
+        signOut(auth)
+            .then(() => { })
+            .finally(() => setIsLoading(false));
+    }
 
-  const signInWithGoogle = () => {
-    return signInWithPopup(auth, googleProvider)
-
-  }
-
-
-  const createAccountWithGoogle = (email, password) => {
-
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
-
-
-  const loginWithEmailAndPassword = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-  }
-
-
-  const updateName = (name) => {
-    updateProfile(auth.currentUser, {
-      displayName: name
-    }).then(() => {
-      const newUser = { ...user, displayName: name } // recommend
-      setUser(newUser)
-
-      // ...
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    });
-  }
-
-  const logOut = () => {
-    console.log("logouttttt");
-    signOut(auth).then(() => {
-      setUser({})
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
-
-  return {
-    user, setUser,
-    signInWithGoogle,
-    createAccountWithGoogle,
-    loginWithEmailAndPassword,
-    isLoading,
-    setIsLoading,
-    logOut,
-    updateName
-
-  }
+    return {
+        user,
+        isLoading,
+        signInUsingGoogle,
+        logOut
+    }
 }
 
 export default useFirebase;
-
-
-
-
-
-

@@ -7,9 +7,7 @@ import Home from './Page/Home/Home';
 import Footer from './Page/Shared/Footer/Footer';
 import Header from './Page/Shared/Header/Header';
 import PrivateRoute from './Login/PrivateRoute/PrivateRoute';
-// import Services from './Services/Services';
 import Login from './Login/Login/Login';
-import Register from './Login/Register/Register';
 import NoteFound from './Page/NoteFound/NoteFound';
 import AddServices from './AddServices/AddServices';
 import MyOrders from './Page/MyOrders/MyOrders';
@@ -33,9 +31,7 @@ function App() {
             <Route exact path="/contactUs">
               <Contact></Contact>
             </Route>
-            {/* <Route exact path="/services">
-              <Services></Services>
-            </Route> */}
+
             <PrivateRoute exact path="/addServices">
               <AddServices></AddServices>
             </PrivateRoute>
@@ -53,9 +49,6 @@ function App() {
             </PrivateRoute>
             <Route exact path="/login">
               <Login></Login>
-            </Route>
-            <Route exact path="/register">
-              <Register></Register>
             </Route>
             <Route path="/*">
               <NoteFound></NoteFound>

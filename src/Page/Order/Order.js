@@ -60,9 +60,7 @@ const Order = () => {
                             <input className="form-control  w-75" {...register("number", { required: true })} placeholder="Mobile Number" /> <br></br>
 
                             <input className="form-control  w-75" {...register("date", { required: true })} placeholder="Date" /> <br></br>
-
-
-                            <input type="submit" className="btn btn-outline-danger w-25 " />
+                            <input type="submit" className="btn btn-outline-danger w-25 bn5" />
 
                         </form>
                     </div>

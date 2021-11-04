@@ -1,88 +1,25 @@
-import React, { useState } from "react";
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import useAuth from "../../Hooks/useAuth";
-import './Login.css'
+import React from 'react';
+import useAuth from '../../Hooks/useAuth'
+import "./Login.css";
 
 const Login = () => {
-  const { signInWithGoogle, setUser, loginWithEmailAndPassword, setIsLoading } = useAuth();
-
-  const history = useHistory()
-  const location = useLocation()
-
-  const url = location.state?.from || "/home"
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-
-  const handleGetEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handleGetPassword = (e) => {
-    setPassword(e.target.value);
-  }
-
-
-
-
-  const handleLoginWithEmailAndPassword = (e) => {
-    e.preventDefault();
-
-    loginWithEmailAndPassword(email, password)
-      .then((res) => {
-        setIsLoading(true)
-        setUser(res.user);
-        history.push(url)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
-
-
-
-
-
-  const handleGoogleLogin = () => {
-    signInWithGoogle()
-      .then((res) => {
-        setIsLoading(true)
-        setUser(res.user)
-        history.push(url)
-      }
-      )
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsLoading(false)
-      })
-  };
-
-  return (
-    <div className="login pt-4 pb-4 login-card mx-auto my-4">
-      <div className="text-center">
-        <h3 className='pb-4 pt-4'>Please <span className="text-primary">Login</span> Here</h3>
-      </div>
-      <div className="">
-        <form onSubmit={handleLoginWithEmailAndPassword}>
-          <input className="form-control" type="email" onBlur={handleGetEmail} placeholder="Email" />
-          <br />
-          <input className="form-control" type="password" onBlur={handleGetPassword} placeholder="Password" />
-          <br />
-          <input className="btn btn-primary me-3 px-3" type="submit" value="login" /> <br /> <br />
-          <button className="btn btn-primary" onClick={handleGoogleLogin}>Google Sign In</button>
-        </form>
-        <p className="pt-5"> New User ? <Link className="text-decoration-none" to="/register"> Please register</Link ></p>
-      </div>
-
-
-    </div>
-  );
+    const { signInUsingGoogle, user, logOut } = useAuth()
+    console.log(user)
+    return (
+        <div className="d-flex justify-content-center">
+            <div className="card login" style={{ width: "22rem", height: "25rem", marginTop: "30px", marginBottom: "40px " }}>
+                <div className="card-body">
+                    <h2 className="card-title mb-5 text-center colored fw-bold">Have to Login First</h2>
+                    <p className="card-text mb-3">What we like about this login form is that it enjoys inline validation in both the username and password fields, offering a bit of usability-friendly guidance to users. Another type of validation pops up above the login form after a failed attempt.</p>
+                    <div>
+                        <p className="text-center">Login as <span className="text-dark fw-bold">{user.displayName}</span></p>
+                    </div>
+                    {user.email ? (<button className=" btn btn-danger d-flex mx-auto mb-4 bn5" onClick={logOut}>Logout</button>) :
+                        (<button className=" btn btn-danger d-flex mx-auto bn5" onClick={signInUsingGoogle}>Google Sign In</button>)}
+                </div>
+            </div>
+        </div >
+    );
 };
 
 export default Login;

@@ -26,7 +26,7 @@ const Details = () => {
 
                     <div className="pt-3">
                         <Link to={`/order/${service._id}`}>
-                            <button className="btn btn-outline-danger px-3 mt-3">Book now</button>
+                            <button className="btn btn-outline-danger px-3 mt-3 bn5">Book now</button>
                         </Link>
                     </div>
 
