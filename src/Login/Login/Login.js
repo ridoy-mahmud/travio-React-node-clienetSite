@@ -3,7 +3,7 @@ import useAuth from '../../Hooks/useAuth'
 import "./Login.css";
 
 const Login = () => {
-    const { signInUsingGoogle, user, logOut } = useAuth()
+    const { signInUsingGoogle, user, logOut, singInGithub } = useAuth()
     console.log(user)
     return (
         <div className="d-flex justify-content-center">
@@ -16,6 +16,9 @@ const Login = () => {
                     </div>
                     {user.email ? (<button className=" btn btn-danger d-flex mx-auto mb-4 bn5" onClick={logOut}>Logout</button>) :
                         (<button className=" btn btn-danger d-flex mx-auto bn5" onClick={signInUsingGoogle}>Google Sign In</button>)}
+                    <div>
+                        <button onClick={singInGithub} className="">Git hub</button>
+                    </div>
                 </div>
             </div>
         </div >
