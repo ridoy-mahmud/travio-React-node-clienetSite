@@ -16,9 +16,9 @@ const Login = () => {
                     </div>
                     {user.email ? (<button className=" btn btn-danger d-flex mx-auto mb-4 bn5" onClick={logOut}>Logout</button>) :
                         (<button className=" btn btn-danger d-flex mx-auto bn5" onClick={signInUsingGoogle}>Google Sign In</button>)}
-                    <div>
+                    {/* <div>
                         <button onClick={singInGithub} className="">Git hub</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div >
